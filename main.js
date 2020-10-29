@@ -1,12 +1,10 @@
-// eslint-disable-next-line import/extensions
-import HSLToHex from './HSLToHex.js';
-
 /*
 # # # # # # # # # #
 constants
 # # # # # # # # # #
 */
 
+const colorStart = (Math.random() * 200) + 10;
 const brickHeight = 20;
 const brickPadding = 10;
 const bricks = [];
@@ -15,7 +13,7 @@ const ctx = canvas.getContext('2d');
 const paddleHeight = 10;
 const paddleWidth = 75;
 const ballRadius = 10;
-const black = '#000';
+const black = 'hsl(0, 0%, 0%)';
 const brickOffsetTop = 30;
 const brickOffsetLeft = 30;
 const brickColumnCount = 5;
@@ -163,8 +161,10 @@ function createBrickrow(columnCount, rowNumber, width, height, offsetLeft, offse
       width,
       height,
       status: 1,
-      color: HSLToHex(i * (1 / columnCount) * 100 + h, s, l),
+      color: `hsl(${(i * (1 / columnCount) * 100 + h)}, ${s}, ${l})`,
     });
+
+    console.log(`hsl(${Math.floor((i * (1 / columnCount) * 100 + h))}, ${s}, ${l})`);
   }
   return row;
 }
@@ -255,11 +255,11 @@ document.addEventListener('mousemove', mouseMoveHandler, false);
 
 for (let i = 0; i <= 2; i += 2) {
   bricks[i] = createBrickrow(
-    brickColumnCount, i, brickWidth, brickHeight, brickOffsetLeft, brickOffsetTop, 170, 100, 60,
+    brickColumnCount, i, brickWidth, brickHeight, brickOffsetLeft, brickOffsetTop, colorStart, '100%', '60%',
   );
 }
 bricks[1] = createBrickrow(
-  brickColumnCount * 2, 1, 32.5, brickHeight, brickOffsetLeft, brickOffsetTop, 170, 100, 60,
+  brickColumnCount * 2, 1, 32.5, brickHeight, brickOffsetLeft, brickOffsetTop, colorStart, '100%', '60%',
 );
 
 draw();
