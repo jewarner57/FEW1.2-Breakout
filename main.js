@@ -38,6 +38,7 @@ const paddle = new Paddle((canvas.width - 75) / 2, canvas.height - 10, 75, 10);
 
 const livesLabel = new Label(canvas.width - 65, 20, 'Lives:', 3);
 const scoreLabel = new Label(8, 20, 'Score: ', 0);
+const endMessage = new Label(canvas.width / 2 - (5 * 10), canvas.height / 2, "", "")
 
 /*
 # # # # # # # # # #
@@ -99,12 +100,6 @@ function blockCollision() {
   }
 }
 
-function drawMessage(message) {
-  ctx.font = '20px Arial';
-  ctx.fillStyle = '#000';
-  ctx.fillText(message, canvas.width / 2 - (5 * message.length), canvas.height / 2);
-}
-
 function drawBricks() {
   for (let r = 0; r < bricks.length; r += 1) {
     for (let c = 0; c < bricks[r].row.length; c += 1) {
@@ -123,9 +118,11 @@ function resetGame() {
 
 function endGameMessage() {
   if (livesLabel.count <= 0) {
-    drawMessage('Game Over');
+    endMessage.text = 'Game Over.';
+    endMessage.render(ctx);
   } else if (levelFinished) {
-    drawMessage('You Won!');
+    endMessage.text = 'You Won!';
+    endMessage.render(ctx);
   }
 }
 

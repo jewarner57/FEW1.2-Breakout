@@ -2,7 +2,7 @@ export default class Label {
   constructor(x, y, text, count) {
     this.x = x;
     this.y = y;
-    this.text = text
+    this.text = text;
     this.count = count;
   }
 
