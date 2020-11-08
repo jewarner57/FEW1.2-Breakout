@@ -95,7 +95,7 @@ function blockCollision() {
       }
     }
   }
-  if (scoreLabel.score >= blockCount) {
+  if (scoreLabel.count >= blockCount) {
     levelFinished = true;
   }
 }
