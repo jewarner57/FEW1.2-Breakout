@@ -28,6 +28,9 @@ variables
 # # # # # # # # # #
 */
 
+let score = 0;
+let lives = 3;
+
 let rightPressed = false;
 let leftPressed = false;
 let levelFinished = false;
@@ -36,9 +39,9 @@ let levelFinished = false;
 const ball = new Ball(10, canvas.width / 2, canvas.height - 30);
 const paddle = new Paddle((canvas.width - 75) / 2, canvas.height - 10, 75, 10);
 
-const livesLabel = new Label(canvas.width - 65, 20, 'Lives:', 3);
-const scoreLabel = new Label(8, 20, 'Score: ', 0);
-const endMessage = new Label(canvas.width / 2 - (5 * 10), canvas.height / 2, "", "")
+const livesLabel = new Label(canvas.width - 65, 20, `Lives: ${lives}`);
+const scoreLabel = new Label(8, 20, `Score: ${score}`);
+const endMessage = new Label(canvas.width / 2 - (5 * 10), canvas.height / 2, "")
 
 /*
 # # # # # # # # # #
@@ -90,12 +93,13 @@ function blockCollision() {
         ) {
           ball.dy = -ball.dy;
           b.status = 0;
-          scoreLabel.count += 1;
+          score += 1;
+          scoreLabel.text = `Score: ${score}`;
         }
       }
     }
   }
-  if (scoreLabel.count >= blockCount) {
+  if (score >= blockCount) {
     levelFinished = true;
   }
 }
@@ -111,13 +115,14 @@ function drawBricks() {
 }
 
 function resetGame() {
-  livesLabel.count -= 1;
+  lives -= 1;
+  livesLabel.text = `Lives: ${lives}`;
   paddle.x = (canvas.width - paddle.width) / 2;
   ball.resetBall();
 }
 
 function endGameMessage() {
-  if (livesLabel.count <= 0) {
+  if (lives <= 0) {
     endMessage.text = 'Game Over.';
     endMessage.render(ctx);
   } else if (levelFinished) {
@@ -143,7 +148,7 @@ function canvasBorderCollision() {
 }
 
 function draw() {
-  if (livesLabel.count > 0 && !levelFinished) {
+  if (lives > 0 && !levelFinished) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ball.render(ctx);
@@ -178,11 +183,9 @@ for (let i = 0; i <= 2; i += 2) {
   bricks[i] = new Brickrow(
     brickColumnCount, i, brickWidth, brickHeight, brickOffsetLeft, brickOffsetTop, colorStart, '100%', '60%',
   );
-  bricks[i].createBricks();
 }
 bricks[1] = new Brickrow(
   brickColumnCount * 2, 1, 32.5, brickHeight, brickOffsetLeft, brickOffsetTop, colorStart, '100%', '60%',
 );
-bricks[1].createBricks();
 
 draw();

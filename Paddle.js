@@ -1,8 +1,8 @@
 import Sprite from './Sprite.js';
 
 export default class Paddle extends Sprite {
-  constructor(x, y, width, height) {
-    super(x, y);
+  constructor(x, y, width, height, color = '#000') {
+    super(x, y, color);
     this.width = width;
     this.height = height;
   }

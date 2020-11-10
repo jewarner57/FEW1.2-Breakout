@@ -2,11 +2,10 @@ import Sprite from './Sprite.js';
 
 export default class Brick extends Sprite {
   constructor(x, y, width, height, color) {
-    super(x, y);
+    super(x, y, color);
     this.width = width;
     this.height = height;
     this.status = 1;
-    this.color = color;
   }
 
   render(ctx) {

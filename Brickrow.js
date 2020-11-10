@@ -13,6 +13,7 @@ export default class Brickrow {
     this.s = s;
     this.l = l;
     this.row = [];
+    this.createBricks();
   }
 
   createBricks() {

@@ -1,8 +1,8 @@
 import Sprite from './Sprite.js';
 
 export default class Ball extends Sprite {
-  constructor(radius, x, y) {
-    super(x, y);
+  constructor(radius, x, y, color = '#000') {
+    super(x, y, color);
     this.startX = x;
     this.startY = y;
     this.radius = radius;
